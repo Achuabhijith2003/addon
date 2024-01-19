@@ -1,10 +1,16 @@
+// ignore: duplicate_ignore
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'dart:developer';
 
 import 'package:addon/Screen/Auth/Email_auth/Email_SignUp.dart';
+import 'package:addon/Screen/Auth/Phone_auth/Phone_auth.dart';
 import 'package:addon/Screen/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class E_mail_signIn extends StatefulWidget {
   const E_mail_signIn({super.key});
 
@@ -12,6 +18,7 @@ class E_mail_signIn extends StatefulWidget {
   State<E_mail_signIn> createState() => _E_mail_signInState();
 }
 
+// ignore: camel_case_types
 class _E_mail_signInState extends State<E_mail_signIn> {
   bool _isObscure = true;
   TextEditingController emailcontroller = TextEditingController();
@@ -104,7 +111,7 @@ class _E_mail_signInState extends State<E_mail_signIn> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Home()));
+                                    builder: (context) => const phone_auth()));
                           },
                           child: const Text("SignIn using Phone no")),
                     )

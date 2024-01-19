@@ -44,7 +44,7 @@ class HomeState extends State<Home> {
   void logout() async {
     await FirebaseAuth.instance.signOut();
     // ignore: use_build_context_synchronously
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const E_mail_signIn(),
