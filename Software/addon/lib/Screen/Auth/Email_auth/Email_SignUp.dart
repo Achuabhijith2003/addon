@@ -203,7 +203,9 @@ class _Email_signUpState extends State<Email_signUp> {
   void createdatabase() async {
     String email = emailcontroller.text.trim();
     Map<String, dynamic> newuserdata = {
+      "Name": " ",
       "Email": email,
+      "Phone": " "
     };
     FirebaseFirestore.instance
         .collection(email)

@@ -123,6 +123,8 @@ class opt_verficationState extends State<opt_verfication> {
 
   void createdatabase() async {
     Map<String, dynamic> newuserdata = {
+      "Name": " ",
+      "Email": "",
       "Phone": widget.phoneno,
     };
     FirebaseFirestore.instance

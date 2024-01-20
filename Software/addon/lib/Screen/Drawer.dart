@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:addon/Screen/Profile/Profile.dart';
 import 'package:flutter/material.dart';
 
 class Drawers extends StatelessWidget {
@@ -20,7 +21,8 @@ class Drawers extends StatelessWidget {
           ),
           onDetailsPressed: () {
             //print("Profile");
-            Navigator.of(context).pushNamed('profile');
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const profile()));
           },
           currentAccountPicture: CircleAvatar(
             child: ClipOval(
