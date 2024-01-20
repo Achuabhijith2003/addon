@@ -89,8 +89,10 @@ class _phone_authState extends State<phone_auth> {
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      opt_verfication(verficationID: verificationId)));
+                  builder: (context) => opt_verfication(
+                        verficationID: verificationId,
+                        phoneno: phone,
+                      )));
         },
         codeAutoRetrievalTimeout: (verificationId) {},
         timeout: const Duration(seconds: 30),

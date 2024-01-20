@@ -1,16 +1,21 @@
 import 'package:addon/Screen/Auth/Phone_auth/Phone_auth.dart';
 import 'package:addon/Screen/Home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+// ignore: camel_case_types
 class opt_verfication extends StatefulWidget {
   final String verficationID;
-  const opt_verfication({super.key, required this.verficationID});
+  final String phoneno;
+  const opt_verfication(
+      {super.key, required this.verficationID, required this.phoneno});
 
   @override
   State<opt_verfication> createState() => opt_verficationState();
 }
 
+// ignore: camel_case_types
 class opt_verficationState extends State<opt_verfication> {
   TextEditingController otpController = TextEditingController();
   @override
@@ -82,6 +87,7 @@ class opt_verficationState extends State<opt_verfication> {
             await FirebaseAuth.instance.signInWithCredential(Credential);
         if (userCredential.user != null) {
           // Access user through the instance
+          createdatabase();
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
               context,
@@ -113,5 +119,15 @@ class opt_verficationState extends State<opt_verfication> {
         );
       },
     );
+  }
+
+  void createdatabase() async {
+    Map<String, dynamic> newuserdata = {
+      "Phone": widget.phoneno,
+    };
+    FirebaseFirestore.instance
+        .collection(widget.phoneno)
+        .doc("Profile")
+        .set(newuserdata);
   }
 }

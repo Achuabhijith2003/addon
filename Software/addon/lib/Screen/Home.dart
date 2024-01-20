@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:addon/Screen/Auth/Email_auth/Email_SignIn.dart';
 import 'package:addon/Screen/Drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +30,8 @@ class HomeState extends State<Home> {
         ),
         body: Column(
           children: [
-            ElevatedButton(onPressed: () {}, child: const Text("data"))
+            ElevatedButton(onPressed: () {}, child: const Text("data")),
+            Text(getemail())
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -49,5 +52,15 @@ class HomeState extends State<Home> {
         MaterialPageRoute(
           builder: (context) => const E_mail_signIn(),
         ));
+  }
+
+  String getemail() {
+    String? email = FirebaseAuth.instance.currentUser!.email;
+    String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
+    if (email == null) {
+      return phoneno!;
+    } else {
+      return email;
+    }
   }
 }

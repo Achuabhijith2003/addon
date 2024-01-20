@@ -1,9 +1,13 @@
+// ignore_for_file: file_names
+
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'Email_SignIn.dart';
 
+// ignore: camel_case_types
 class Email_signUp extends StatefulWidget {
   const Email_signUp({super.key});
 
@@ -11,6 +15,7 @@ class Email_signUp extends StatefulWidget {
   State<Email_signUp> createState() => _Email_signUpState();
 }
 
+// ignore: camel_case_types
 class _Email_signUpState extends State<Email_signUp> {
   bool _isObscure = true;
   bool _isObscure1 = true;
@@ -150,6 +155,7 @@ class _Email_signUpState extends State<Email_signUp> {
           UserCredential userCredential = await FirebaseAuth.instance
               .createUserWithEmailAndPassword(email: email, password: password);
           if (userCredential.user != null) {
+            createdatabase();
             // ignore: use_build_context_synchronously
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const E_mail_signIn()));
@@ -192,5 +198,16 @@ class _Email_signUpState extends State<Email_signUp> {
         );
       },
     );
+  }
+
+  void createdatabase() async {
+    String email = emailcontroller.text.trim();
+    Map<String, dynamic> newuserdata = {
+      "Email": email,
+    };
+    FirebaseFirestore.instance
+        .collection(email)
+        .doc("Profile")
+        .set(newuserdata);
   }
 }

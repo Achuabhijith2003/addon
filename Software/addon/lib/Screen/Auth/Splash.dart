@@ -1,3 +1,7 @@
+// ignore: duplicate_ignore
+// ignore: file_names
+// ignore_for_file: file_names
+
 import 'package:addon/Screen/Auth/Email_auth/Email_SignIn.dart';
 import 'package:addon/Screen/Home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
