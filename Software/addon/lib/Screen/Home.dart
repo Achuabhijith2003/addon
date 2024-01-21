@@ -5,6 +5,7 @@ import 'package:addon/Screen/Drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../Package/methods.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -97,13 +98,13 @@ class HomeState extends State<Home> {
         ));
   }
 
-  String getauth() {
-    String? email = FirebaseAuth.instance.currentUser!.email;
-    String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
-    if (email == null) {
-      return phoneno!;
-    } else {
-      return email;
-    }
-  }
+  // String getauth() {
+  //   String? email = FirebaseAuth.instance.currentUser!.email;
+  //   String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
+  //   if (email == null) {
+  //     return phoneno!;
+  //   } else {
+  //     return email;
+  //   }
+  // }
 }

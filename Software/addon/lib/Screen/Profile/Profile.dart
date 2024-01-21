@@ -1,7 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:addon/Screen/Profile/Profile_edit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:addon/Package/methods.dart';
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
@@ -76,7 +77,14 @@ class _profileState extends State<profile> {
                                           Text("Phone : " + userdata["Phone"]),
                                     )),
                                 ElevatedButton(
-                                    onPressed: () {}, child: const Text("Edit"))
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const editprofile()));
+                                    },
+                                    child: const Text("Edit"))
                               ],
                             );
                           },
@@ -99,25 +107,4 @@ class _profileState extends State<profile> {
       ]),
     );
   }
-
-  String getauth() {
-    String? email = FirebaseAuth.instance.currentUser!.email;
-    String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
-    if (email == null) {
-      return phoneno!;
-    } else {
-      return email;
-    }
-  }
-
-  Future getCount() async => FirebaseFirestore.instance
-          .collection(getauth()) //your collectionref
-          .where('deleted', isEqualTo: false)
-          .get()
-          .then((value) {
-        int count = 0;
-        count = value.docs.length;
-
-        return count;
-      });
 }
