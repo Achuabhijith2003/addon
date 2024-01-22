@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1066353007593",
+    "project_id": "addon-9498b",
+    "storage_bucket": "addon-9498b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066353007593:android:efed34a4182faed091c978",
+        "android_client_info": {
+          "package_name": "com.example.addon"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOzb3Y55ILx6OhTocSMY--dVnjFTL-9_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
