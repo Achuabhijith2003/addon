@@ -1,9 +1,13 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:addon/Package/methods.dart';
 import 'package:addon/Screen/Profile/Profile.dart';
 import 'package:flutter/material.dart';
 
 class editprofile extends StatefulWidget {
-  const editprofile({super.key});
+  const editprofile({
+    super.key,
+  });
 
   @override
   State<editprofile> createState() => _editprofileState();
@@ -73,9 +77,13 @@ class _editprofileState extends State<editprofile> {
               onPressed: () {
                 String name = namecontoller.text.trim();
                 String phone = phonenocontoller.text.trim();
-                updateprofile(name, getauth(), phone);
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const profile()));
+                if (name == "" || phone == "") {
+                  errormessage("Fil the blanks");
+                } else {
+                  updateprofile(name, getauth(), phone);
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const profile()));
+                }
               },
               child: const Text("Change"))
         ],
@@ -105,13 +113,36 @@ class _editprofileState extends State<editprofile> {
               onPressed: () {
                 String name = namecontoller.text.trim();
                 String email = emailcontroller.text.trim();
-                updateprofile(name, email, getauth());
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const profile()));
+                if (name == "" || email == "") {
+                  errormessage("Fil the blanks");
+                } else {
+                  updateprofile(name, email, getauth());
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const profile()));
+                }
               },
               child: const Text("Change"))
         ],
       );
     }
+  }
+
+  void errormessage(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Error!'),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Okay'))
+          ],
+        );
+      },
+    );
   }
 }

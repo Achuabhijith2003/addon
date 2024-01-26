@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:addon/Screen/Add%20section/group_create.dart';
 import 'package:addon/Screen/Auth/Email_auth/Email_SignIn.dart';
 import 'package:addon/Screen/Drawer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -78,7 +79,10 @@ class HomeState extends State<Home> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Creategroup()));
+          },
           backgroundColor: Colors.white,
           child: const Icon(
             Icons.add,
@@ -98,13 +102,34 @@ class HomeState extends State<Home> {
         ));
   }
 
-  // String getauth() {
-  //   String? email = FirebaseAuth.instance.currentUser!.email;
-  //   String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
-  //   if (email == null) {
-  //     return phoneno!;
-  //   } else {
-  //     return email;
-  //   }
+  // void createbox() {
+  //   showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: const Text('Create Group'),
+  //         content: const TextField(
+  //           decoration: InputDecoration(hintText: "Create name for the group"),
+  //         ),
+  //         actions: [
+  //           ElevatedButton(
+  //               onPressed: () {
+  //                 Navigator.pop(context);
+  //               },
+  //               child: const Text("Cancel")),
+  //           ElevatedButton(
+  //               onPressed: () {
+
+  //                 Navigator.pushReplacement(
+  //                     context,
+  //                     MaterialPageRoute(
+  //                       builder: (context) => const add_things(),
+  //                     ));
+  //               },
+  //               child: const Text("Create"))
+  //         ],
+  //       );
+  //     },
+  //   );
   // }
 }

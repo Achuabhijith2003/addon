@@ -22,6 +22,7 @@ class _SplashState extends State<Splash> {
       body: FlutterSplashScreen(
         splashScreenBody: screen(),
         backgroundColor: Colors.white,
+        // nextScreen: const E_mail_signIn(),
         nextScreen: (FirebaseAuth.instance.currentUser != null)
             ? const Home()
             : const E_mail_signIn(),
