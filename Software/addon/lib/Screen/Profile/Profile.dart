@@ -15,6 +15,7 @@ class profile extends StatefulWidget {
 
 // ignore: camel_case_types
 class _profileState extends State<profile> {
+  Authithication authobj = Authithication();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +29,7 @@ class _profileState extends State<profile> {
             children: [
               StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection(getauth())
+                    .collection(authobj.getauth())
                     .doc("Profile")
                     .snapshots(),
                 builder: (context, snapshot) {

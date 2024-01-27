@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:addon/Package/methods.dart';
+import 'package:addon/Screen/Add%20section/add_details.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,7 +14,7 @@ class Creategroup extends StatefulWidget {
 
 class _CreategroupState extends State<Creategroup> {
   TextEditingController namecontroller = TextEditingController();
-  File? profilepic;
+  File? grouppic;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +31,7 @@ class _CreategroupState extends State<Creategroup> {
                 if (selectedimage != null) {
                   File convertimage = File(selectedimage.path);
                   setState(() {
-                    profilepic = convertimage;
+                    grouppic = convertimage;
                   });
                   debugPrintStack(label: "Image selected");
                 } else {
@@ -41,8 +42,7 @@ class _CreategroupState extends State<Creategroup> {
               }
             },
             child: CircleAvatar(
-              backgroundImage:
-                  (profilepic != null) ? FileImage(profilepic!) : null,
+              backgroundImage: (grouppic != null) ? FileImage(grouppic!) : null,
               backgroundColor: (Colors.green),
               radius: 70,
             )),
@@ -73,8 +73,14 @@ class _CreategroupState extends State<Creategroup> {
     String groupname = namecontroller.text.trim();
     if (groupname == "") {
     } else {
-      bool result = groupcreate(groupname);
+      Groups groups = Groups();
+      Future<bool> result = groups.groupcreate(groupname, grouppic);
       print(result);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => adddetiles(groupname: groupname),
+          ));
     }
   }
 }

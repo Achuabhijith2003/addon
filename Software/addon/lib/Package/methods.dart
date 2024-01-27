@@ -1,80 +1,52 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 
-// get login email or phone
-String getauth() {
-  String? email = FirebaseAuth.instance.currentUser!.email;
-  String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
-  if (email == null) {
-    return phoneno!;
-  } else {
-    return email;
+class Authithication {
+  // get login email or phone
+  String getauth() {
+    String? email = FirebaseAuth.instance.currentUser!.email;
+    String? phoneno = FirebaseAuth.instance.currentUser!.phoneNumber;
+    if (email == null) {
+      return phoneno!;
+    } else {
+      return email;
+    }
   }
-}
-
-// Profile updating methods
-bool updateprofile(String name, String emailid, String phone) {
-  Map<String, dynamic> updatenewuserdata = {
-    "Name": name,
-    "Email": emailid,
-    "Phone": phone
-  };
-  try {
-    FirebaseFirestore.instance
-        .collection(getauth())
-        .doc("Profile")
-        .update(updatenewuserdata);
-    return true;
-  } on FirebaseFirestore catch (e) {
-    print(e);
-    return false;
-  }
-}
 
 // to find the user login with email or phone
-loginstyle() {
-  if (getauth().contains("@")) {
-    return true;
-  } else {
-    return false;
+  loginstyle() {
+    if (getauth().contains("@")) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
-//create and update group
-bool groupupdate(
-  String groupname,
-  name,
-  age,
-) {
-  Map<String, dynamic> groupdata = {
-    "Group Name": groupname,
-    "Name": name,
-    "Age": age
-  };
-  try {
-    FirebaseFirestore.instance.collection(getauth()).doc("Groups").update({
-      groupname: [groupdata]
-    });
-    return true;
-  } catch (e) {
-    //print(e);
-    return false;
-  }
-}
+class Profile {
+  Authithication auth = Authithication();
 
-bool groupcreate(
-   String  groupname,
-) {
-  Map<String, dynamic> groupdata = {
-    "Group Name": groupname,
-  };
-  try {
-    FirebaseFirestore.instance.collection(getauth()).doc("Groups").set({
-      groupname: [groupdata]
-    });
-    return true;
-  } catch (e) {
-    return false;
+  // Profile updating methods
+  bool updateprofile(String name, String emailid, String phone) {
+    Map<String, dynamic> updatenewuserdata = {
+      "Name": name,
+      "Email": emailid,
+      "Phone": phone
+    };
+    try {
+      FirebaseFirestore.instance
+          .collection(auth.getauth())
+          .doc("Profile")
+          .update(updatenewuserdata);
+      return true;
+    } on FirebaseFirestore catch (e) {
+      print(e);
+      return false;
+    }
   }
 }
 
@@ -96,3 +68,59 @@ bool groupcreate(
 //       },
 //     );
 //   }
+
+class Groups {
+  Authithication auth = Authithication();
+// update group
+  bool groupupdate(
+    String groupname,
+    name,
+    age,
+  ) {
+    Map<String, dynamic> groupdata = {
+      "Group Name": groupname,
+      "Name": name,
+      "Age": age
+    };
+    try {
+      FirebaseFirestore.instance
+          .collection(auth.getauth())
+          .doc("Groups")
+          .update({
+        groupname: [groupdata]
+      });
+      return true;
+    } catch (e) {
+      //print(e);
+      return false;
+    }
+  }
+
+//Create Group
+  Future<bool> groupcreate(String groupname, File? grouppic) async {
+    TaskSnapshot uploadTask = await FirebaseStorage.instance
+        .ref()
+        .child("Groupic")
+        .child(const Uuid().v1())
+        .putFile(grouppic!);
+
+    //  TaskSnapshot takesnapshot = uploadTask;
+
+    String downloadurl = await uploadTask.ref.getDownloadURL();
+    Map<String, dynamic> groupdata = {
+      "Group Name": groupname,
+      "Groupic": downloadurl,
+    };
+    try {
+      FirebaseFirestore.instance
+          .collection(auth.getauth())
+          .doc("Groups")
+          .update({
+        groupname: [groupdata]
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+}

@@ -31,51 +31,51 @@ class HomeState extends State<Home> {
                 icon: const Icon(Icons.logout_rounded))
           ],
         ),
-        body: Column(
+        body: const Column(
           children: [
-            StreamBuilder<QuerySnapshot>(
-              stream:
-                  FirebaseFirestore.instance.collection(getauth()).snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.active) {
-                  if (snapshot.hasData && snapshot.data != null) {
-                    return Expanded(
-                      child: ListView.builder(
-                        itemBuilder: (context, index) {
-                          Map<String, dynamic> userdata =
-                              snapshot.data!.docs[index].data()
-                                  as Map<String, dynamic>;
-                          return ListTile(
-                              title: Text(snapshot.data!.docs[index].id),
-                              //subtitle: Text(userdata["Phone"]),
-                              trailing: IconButton(
-                                onPressed: () {
-                                  try {
-                                    print(snapshot.data!.docs[index].id);
-                                    FirebaseFirestore.instance
-                                        .collection(getauth())
-                                        .doc(snapshot.data!.docs[index].id)
-                                        .delete();
-                                  } catch (e) {
-                                    print(e);
-                                  }
-                                },
-                                icon: const Icon(Icons.delete),
-                              ));
-                        },
-                        itemCount: snapshot.data!.docs.length,
-                      ),
-                    );
-                  } else {
-                    return const Text("No data!");
-                  }
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            )
+            // StreamBuilder<QuerySnapshot>(
+            //   stream:
+            //       FirebaseFirestore.instance.collection(getauth()).snapshots(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.active) {
+            //       if (snapshot.hasData && snapshot.data != null) {
+            //         return Expanded(
+            //           child: ListView.builder(
+            //             itemBuilder: (context, index) {
+            //               Map<String, dynamic> userdata =
+            //                   snapshot.data!.docs[index].data()
+            //                       as Map<String, dynamic>;
+            //               return ListTile(
+            //                   title: Text(snapshot.data!.docs[index].id),
+            //                   //subtitle: Text(userdata["Phone"]),
+            //                   trailing: IconButton(
+            //                     onPressed: () {
+            //                       try {
+            //                         print(snapshot.data!.docs[index].id);
+            //                         FirebaseFirestore.instance
+            //                             .collection(getauth())
+            //                             .doc(snapshot.data!.docs[index].id)
+            //                             .delete();
+            //                       } catch (e) {
+            //                         print(e);
+            //                       }
+            //                     },
+            //                     icon: const Icon(Icons.delete),
+            //                   ));
+            //             },
+            //             itemCount: snapshot.data!.docs.length,
+            //           ),
+            //         );
+            //       } else {
+            //         return const Text("No data!");
+            //       }
+            //     } else {
+            //       return const Center(
+            //         child: CircularProgressIndicator(),
+            //       );
+            //     }
+            //   },
+            // )
           ],
         ),
         floatingActionButton: FloatingActionButton(

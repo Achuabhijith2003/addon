@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
         // nextScreen: const E_mail_signIn(),
         nextScreen: (FirebaseAuth.instance.currentUser != null)
             ? const Home()
-            : const E_mail_signIn(),
+            :const E_mail_signIn() ,
         duration: const Duration(milliseconds: 3515),
         onInit: () async {
           debugPrint("onInit");

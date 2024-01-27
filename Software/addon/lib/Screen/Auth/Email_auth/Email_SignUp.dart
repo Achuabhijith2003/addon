@@ -133,7 +133,7 @@ class _Email_signUpState extends State<Email_signUp> {
                       },
                       child: const Text("Create Account")),
                 ]),
-              )
+              ),
             ],
           ),
         ),

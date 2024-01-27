@@ -2,6 +2,7 @@
 
 import 'package:addon/Package/methods.dart';
 import 'package:addon/Screen/Profile/Profile.dart';
+
 import 'package:flutter/material.dart';
 
 class editprofile extends StatefulWidget {
@@ -17,7 +18,8 @@ class _editprofileState extends State<editprofile> {
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController phonenocontoller = TextEditingController();
   TextEditingController namecontoller = TextEditingController();
-
+  Profile profileobj = Profile();
+  Authithication authobj = Authithication();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +54,7 @@ class _editprofileState extends State<editprofile> {
   }
 
   Widget email_or_phone() {
-    if (loginstyle()) {
+    if (authobj. loginstyle()) {
       return Column(
         children: [
           Padding(
@@ -80,7 +82,7 @@ class _editprofileState extends State<editprofile> {
                 if (name == "" || phone == "") {
                   errormessage("Fil the blanks");
                 } else {
-                  updateprofile(name, getauth(), phone);
+                  profileobj.updateprofile(name,authobj. getauth(), phone);
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const profile()));
                 }
@@ -116,7 +118,7 @@ class _editprofileState extends State<editprofile> {
                 if (name == "" || email == "") {
                   errormessage("Fil the blanks");
                 } else {
-                  updateprofile(name, email, getauth());
+                  profileobj.updateprofile(name, email,authobj. getauth());
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => const profile()));
                 }
